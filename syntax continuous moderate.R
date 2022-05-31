@@ -4,7 +4,7 @@
 #### Last modified: May 31, 2022
 
 rm(list = ls())
-setwd("~/binary moderate")
+setwd("~/continuous moderate")
 LG <- "~/LatentGOLD6.0/lg60.exe"
 GenData <- function(syntaxName, infile, outfile, B, G){
   
