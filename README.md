@@ -41,4 +41,5 @@ We used R to generate the above six LatentGOLD syntaxes and run them in batch mo
 ```
 "~\ LatentGOLD6 .0\ lg60 " GenData.lgs Step1.lgs Step3.lgs Schuler.lgs Yamaguchi.lgs Bray_Tra_Naive.lgs / b / r 500
 ```
-
+## R Codes
+I provided the R Codes to generate LatentGOLD syntax files and read the results from LatentGOLD for each condition. The R Codes to generate graphs and tables are only for 1 condition so they need to be modified to use for other conditions by simply changing the working directory and file names to match the conditions.
