@@ -1,0 +1,44 @@
+//LG6.0//
+version = 6.0
+infile 'exemplary.txt'
+
+model
+options
+   maxthreads=all;
+   algorithm 
+      tolerance=1e-08 emtolerance=0.01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-05 iterations=50;
+   bayes
+      categorical=0 variances=1 latent=0 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-08;
+   quadrature  nodes=10;
+   missing  excludeall;
+   output      
+      parameters=first standarderrors profile bivariateresiduals estimatedvalues=model;
+   outfile 'classification2.txt' classification=posterior classification=model;
+variables
+   caseid caseid;
+   caseweight frequency;
+   dependent Y1, Y2, Y3, Y4, Y5, Y6;
+   independent C1 inactive, C2 inactive, Z inactive;
+   latent
+      Cluster nominal 3;
+equations
+   Cluster <- 1 + C1 + C2;
+   Y1 <- 1 | Cluster;
+   Y2 <- 1 | Cluster;
+   Y3 <- 1 | Cluster;
+   Y4 <- 1 | Cluster;
+   Y5 <- 1 | Cluster;
+   Y6 <- 1 | Cluster;
+   {.5 .5 1 1 1 1 
+    1.386294361    1.386294361    -1.386294361
+    1.386294361    1.386294361    -1.386294361
+    1.386294361    1.386294361    -1.386294361
+    1.386294361   -1.386294361    -1.386294361
+    1.386294361   -1.386294361    -1.386294361
+    1.386294361   -1.386294361    -1.386294361
+    }
+end model
