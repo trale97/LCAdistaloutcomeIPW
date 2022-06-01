@@ -22,7 +22,7 @@ The steps for the exemplary data analysis are as follows
 - Run step3-unadjusted (no correction method and modal assignment) to get propensity scores saved in 'propensity2.txt'
 5. Run schuler.lgs with 'propensity2.txt' 
 6. Run yamaguchi.lgs with 'classification2.txt'
-7. Run braive-tra-naive.lgs with 'propensity1.txt'
+7. Run braive-tra.lgs with 'propensity1.txt'
 
 ## Simulation study in batch mode
 1. The GenData.lgs file was used to generate the data set ‘data.sav’.
