@@ -1,15 +1,13 @@
 
-Simulation study - LCA with distal outcome using IPW 
+Causal Latent Class Analysis with Distal Outcomes: A Modified Three-Step Method Using Inverse Propensity Weighting
 
 ## Authors
-- Tra T. Le | Tilburg University
-- Prof. dr. Jeroen K. Vermunt | Tilburg Univeristy (Supervisor)
-- MSc. Felix Clouth | Tilburg University (Co-supervisor)
+- Tra T. Le | Tilburg University (First author)
+- Dr. Felix Clouth | Tilburg University (First author)
+- Prof. dr. Jeroen Vermunt | Tilburg University
 
 ## Description
-These are the supplementary materials to the First-year Paper written as part of the Research Master in Social and Behavioral Science at Tilburg University under the supervision of Prof.dr. Jeroen Vermunt and MSc. Felix Clouth. 
-
-The repository consists of the codes for the **Exemplary Data Analysis**, LatentGOLD codes for the main **Simulation Study**, R codes to produce tables and figures, and step-by-step example of the process.
+This repository contains the code to reproduce all the results for the paper "Causal Latent Class Analysis with Distal Outcomes: A Modified Three-Step Method Using Inverse Propensity Weighting"
 
 ## Exemplary Data Analysis
 The steps for the exemplary data analysis are as follows
@@ -42,4 +40,7 @@ We used R to generate the above six LatentGOLD syntaxes and run them in batch mo
 "~\ LatentGOLD6 .0\ lg60 " GenData.lgs Step1.lgs Step3.lgs Schuler.lgs Yamaguchi.lgs Bray_Tra_Naive.lgs / b / r 500
 ```
 ## R Codes
-I provided the R Codes to generate LatentGOLD syntax files and read the results from LatentGOLD for each condition. The R Codes to generate graphs and tables are only for 1 condition so they need to be modified to use for other conditions by simply changing the working directory and file names to match the conditions.
+The R scripts were provided to generate LatentGOLD syntax files, read the results from LatentGOLD, and create graphs and tables. 
+
+## Empirical Application
+The folder contains the R script to analyze an empirical dataset from the LISS panel to demonstrate the usage of the proposed methods. 
