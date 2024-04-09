@@ -43,4 +43,4 @@ We used R to generate the above six LatentGOLD syntaxes and run them in batch mo
 The R scripts were provided to generate LatentGOLD syntax files, read the results from LatentGOLD, and create graphs and tables. 
 
 ## Empirical Application
-The folder contains the R script to analyze an empirical dataset from the LISS panel to demonstrate the usage of the proposed methods. 
+The folder contains the LatentGOLD files to analyze an empirical dataset from the LISS panel and the R script to generate the figures and tables in the paper.
