@@ -1,0 +1,139 @@
+//LG6.0//
+version = 6.0
+infile 'C:\Users\fjclouth\Desktop\Tilburg PhD\Projects\5th paper\LISS\LISS_3class_PS.sav'
+
+
+model
+title LISS_naive;
+options
+   maxthreads=all;
+   algorithm 
+      tolerance=1e-008 emtolerance=0.01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-005 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-008;
+   quadrature  nodes=10;
+   missing  excludeall;
+   step3 proportional bch simultaneous;
+   output      
+      parameters=first standarderrors=robust profile estimatedvalues marginaleffects;
+variables
+   dependent job_cat nominal;
+   latent
+      Cluster nominal posterior = ( Cluster#1 Cluster#2 Cluster#3 );
+equations
+   job_cat <- 1 + Cluster;
+end model
+
+
+model
+title LISS_ipw_trunc;
+options
+   maxthreads=all;
+   algorithm 
+      tolerance=1e-008 emtolerance=0.01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-005 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-008;
+   quadrature  nodes=10;
+   missing  excludeall;
+   step3 proportional bch simultaneous;
+   output      
+      parameters=first standarderrors=robust profile estimatedvalues marginaleffects;
+variables
+   dependent job_cat nominal;
+   latent
+      Cluster nominal posterior = ( Cluster#1 Cluster#2 Cluster#3 )
+                      propensity = ( PS1_trunc PS2_trunc PS3_trunc );
+equations
+   job_cat <- 1 + Cluster;
+end model
+
+
+model
+title LISS_ps;
+options
+   maxthreads=all;
+   algorithm 
+      tolerance=1e-008 emtolerance=0.01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-005 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-008;
+   quadrature  nodes=10;
+   missing  excludeall;
+   step3 proportional bch simultaneous;
+   output      
+      parameters=first standarderrors=robust profile estimatedvalues marginaleffects;
+variables
+   independent mCluster#1 bspline degree=3 knots=2, mCluster#2 bspline degree=3 knots=2;
+   dependent job_cat nominal;
+   latent
+      Cluster nominal posterior = ( Cluster#1 Cluster#2 Cluster#3 );
+equations
+   job_cat <- 1 + Cluster + mCluster#1 + mCluster#2 ;
+end model
+
+
+model
+title LISS_ps_trunc;
+options
+   maxthreads=all;
+   algorithm 
+      tolerance=1e-008 emtolerance=0.01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-005 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-008;
+   quadrature  nodes=10;
+   missing  excludeall;
+   step3 proportional bch simultaneous;
+   output      
+      parameters=first standarderrors=robust profile estimatedvalues marginaleffects;
+variables
+   independent PS1_trunc bspline degree=3 knots=2, PS2_trunc bspline degree=3 knots=2;
+   dependent job_cat nominal;
+   latent
+      Cluster nominal posterior = ( Cluster#1 Cluster#2 Cluster#3 );
+equations
+   job_cat <- 1 + Cluster + PS1_trunc + PS2_trunc ;
+end model
+
+
+model
+title LISS_covariates;
+options
+   maxthreads=all;
+   algorithm 
+      tolerance=1e-008 emtolerance=0.01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-005 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-008;
+   quadrature  nodes=10;
+   missing  excludeall;
+   step3 proportional bch simultaneous;
+   output      
+      parameters=first standarderrors=robust profile estimatedvalues marginaleffects;
+variables
+   independent job_lag nominal, gender nominal, age, HHstatus nominal, HHincome, education nominal, origin nominal, health;
+   dependent job_cat nominal;
+   latent
+      Cluster nominal posterior = ( Cluster#1 Cluster#2 Cluster#3 );
+equations
+   job_cat <- 1 + Cluster + job_lag + gender + age + HHstatus + HHincome + education + origin + health ;
+end model
+
+

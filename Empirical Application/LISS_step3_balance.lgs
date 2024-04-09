@@ -1,0 +1,37 @@
+//LG6.0//
+version = 6.0
+infile 'C:\Users\fjclouth\Desktop\Tilburg PhD\Projects\5th paper\LISS\LISS_3class_PS.sav'
+
+
+model
+options
+   maxthreads=all;
+   algorithm 
+      tolerance=1e-008 emtolerance=0.01 emiterations=250 nriterations=50 ;
+   startvalues
+      seed=0 sets=16 tolerance=1e-005 iterations=50;
+   bayes
+      categorical=1 variances=1 latent=1 poisson=1;
+   montecarlo
+      seed=0 sets=0 replicates=500 tolerance=1e-008;
+   quadrature  nodes=10;
+   missing  includeall;
+   step3 proportional bch;
+   output      
+      parameters=first standarderrors=robust profile estimatedvalues marginaleffects;
+variables
+   dependent job_lag nominal, gender nominal, age continuous, HHstatus nominal, HHincome continuous, 
+	 education nominal, origin nominal, health continuous;
+   latent
+      Cluster nominal posterior = ( Cluster#1 Cluster#2 Cluster#3 ) 
+                          propensity = ( PS1_trunc PS2_trunc PS3_trunc );
+equations
+job_lag <- 1 + Cluster;
+gender <- 1 + Cluster;
+age <- 1 + Cluster;
+HHstatus <- 1 + Cluster;
+HHincome <- 1 + Cluster;
+education <- 1 + Cluster;
+origin <- 1 + Cluster;
+health <- 1 + Cluster;
+end model
